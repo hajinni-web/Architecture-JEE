@@ -37,7 +37,7 @@ public class ProductController {
         model.addAttribute("pages", new int[productPage.getTotalPages()]);
         model.addAttribute("currentPage", page);
         model.addAttribute("keyword", keyword);
-        return "products/list";
+        return "products";
     }
 
     // ---- Supprimer un produit ----
@@ -53,7 +53,7 @@ public class ProductController {
     @GetMapping("/products/new")
     public String newProductForm(Model model) {
         model.addAttribute("product", new Product());
-        return "products/form";
+        return "new-product";
     }
 
     // ---- Formulaire d'édition ----
@@ -62,7 +62,7 @@ public class ProductController {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Produit introuvable : " + id));
         model.addAttribute("product", product);
-        return "products/form";
+        return "new-product";
     }
 
     // ---- Enregistrer (ajout + mise à jour) ----
@@ -71,9 +71,20 @@ public class ProductController {
                               BindingResult bindingResult,
                               Model model) {
         if (bindingResult.hasErrors()) {
-            return "products/form";
+            return "new-product";
         }
         productRepository.save(product);
         return "redirect:/products";
+    }
+
+    //-----authentification Controller-----
+     @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
+    @GetMapping("/403")
+    public String accessDenied() {
+        return "notAuthorized";
     }
 }

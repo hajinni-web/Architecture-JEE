@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Bean;
 import com.example.spring_mvc.entities.Product;
 import com.example.spring_mvc.repositories.ProductRepository;
 
-@SpringBootApplication(exclude ={SecurityAutoConfiguration.class})
+//@SpringBootApplication(exclude ={SecurityAutoConfiguration.class})
+@SpringBootApplication
 public class SpringMvcApplication {
 
 	public static void main(String[] args) {
